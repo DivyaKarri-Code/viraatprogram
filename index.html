@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProgramV</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    text-align:center;
+}
+
+header{
+    background:#0078d7;
+    color:white;
+    padding:20px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin:20px;
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+input{
+    width:80%;
+    padding:10px;
+    margin:10px;
+}
+
+button{
+    background:#0078d7;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    margin:5px;
+}
+
+button:hover{
+    background:#005fb3;
+}
+
+.hidden{
+    display:none;
+}
+
+textarea{
+    width:90%;
+    height:250px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🚀 ProgramV</h1>
+<p>Learn HTML or Python for FREE</p>
+</header>
+
+<div class="container">
+
+<!-- Register -->
+<div class="card" id="register">
+<h2>Register</h2>
+<input type="email" id="email" placeholder="Enter Email"><br>
+<button onclick="sendCode()">Get Verification Code</button>
+<p id="codeDisplay"></p>
+<input type="text" id="verify" placeholder="Enter Verification Code"><br>
+<button onclick="verifyCode()">Verify</button>
+</div>
+
+<!-- Course Choice -->
+<div class="card hidden" id="courses">
+<h2>What would you like to learn?</h2>
+
+<button onclick="showHTML()">HTML</button>
+<button onclick="showPython()">Python</button>
+</div>
+
+<!-- HTML -->
+<div class="card hidden" id="htmlCourse">
+<h2>HTML Practice</h2>
+<p>Create a heading:</p>
+
+<textarea id="htmlCode">
+<h1>Hello ProgramV!</h1>
+<p>My first website.</p>
+</textarea><br>
+
+<button onclick="runHTML()">Try & Code</button>
+
+<h3>Preview</h3>
+<iframe id="preview" width="100%" height="250"></iframe>
+
+<h3>HTML Test</h3>
+<p>Which tag creates a heading?</p>
+<button onclick="alert('Correct!')">&lt;h1&gt;</button>
+<button onclick="alert('Try Again')">&lt;p&gt;</button>
+<button onclick="alert('Try Again')">&lt;div&gt;</button>
+</div>
+
+<!-- Python -->
+<div class="card hidden" id="pythonCourse">
+<h2>Python Practice</h2>
+
+<p>Hello World Example:</p>
+
+<textarea>
+print("Hello World")
+</textarea>
+
+<h3>Python Test</h3>
+<p>Which command prints text?</p>
+
+<button onclick="alert('Correct!')">print()</button>
+<button onclick="alert('Try Again')">show()</button>
+<button onclick="alert('Try Again')">display()</button>
+</div>
+
+</div>
+
+<script>
+let verificationCode;
+
+function sendCode(){
+    verificationCode =
+    Math.floor(100000 + Math.random() * 900000);
+
+    document.getElementById("codeDisplay").innerHTML =
+    "Demo Verification Code: " + verificationCode;
+}
+
+function verifyCode(){
+    const entered =
+    document.getElementById("verify").value;
+
+    if(entered == verificationCode){
+        alert("Verified Successfully!");
+        document.getElementById("courses")
+        .classList.remove("hidden");
+    }else{
+        alert("Incorrect Code");
+    }
+}
+
+function showHTML(){
+    document.getElementById("htmlCourse")
+    .classList.remove("hidden");
+
+    document.getElementById("pythonCourse")
+    .classList.add("hidden");
+}
+
+function showPython(){
+    document.getElementById("pythonCourse")
+    .classList.remove("hidden");
+
+    document.getElementById("htmlCourse")
+    .classList.add("hidden");
+}
+
+function runHTML(){
+    let code =
+    document.getElementById("htmlCode").value;
+
+    document.getElementById("preview")
+    .srcdoc = code;
+}
+</script>
+
+</body>
+</html>
